@@ -1,13 +1,16 @@
 import Carousel from 'react-bootstrap/Carousel';
 import GytrashCarouselIcon from '../assets/gytrashBanner.jpg';
 import FieldCarouselIcon from '../assets/fieldBanner.jpg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { LoginContext } from '../App';
 
 
 
 function Connexion() {
+
+    const [loggedIn, setLoggedIn] = useContext(LoginContext);
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -35,6 +38,7 @@ function Connexion() {
             localStorage.setItem('access', data.access)
             localStorage.setItem('refresh', data.refresh)
             console.log(localStorage)
+            setLoggedIn(true)
             navigate('/home')
         })
     }

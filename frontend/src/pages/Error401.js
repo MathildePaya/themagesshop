@@ -3,7 +3,6 @@ function Error401() {
         <div className="h-screen bg-custombg">
             <h1>Error 401 : unauthorized.</h1>
         </div>
-        
     )
 }
 
