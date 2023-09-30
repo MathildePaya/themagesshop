@@ -29,7 +29,7 @@ function Barn() {
                 {barn?
                 items.map((item) => {return (
                     (barn[item].discovered === 1) ?
-                    (<BarnCard plant={item} stock={barn[item].stock} />
+                    (<BarnCard key={item} plant={item} stock={barn[item].stock} />
                     ) : null
                 )})
                 :null

@@ -23,7 +23,7 @@ function SeedCards({choice, setChoice}) {
     <div className='flex'>
     {seeds.map((seed) => 
       {return(
-        <Card style={{ width: '8rem' }}>
+        <Card key={seed} style={{ width: '8rem' }}>
           <Card.Img className='bg-secondcustombg p-2' variant="top" src={plantIcons[seed]} />
           <Card.Body className='bg-secondcustombg text-center'>
             {choice === seed ?

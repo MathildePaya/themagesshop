@@ -35,7 +35,7 @@ function Header(props) {
             </Navbar.Collapse>
           : null}
           <Navbar.Brand>
-            {loggedIn? <img src={fieldIcon} alt="the Mages' Shop's logo" width={80}/>
+            {loggedIn? <NavLink onClick={() => {localStorage.clear()}} className='mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' >Log Out</NavLink>
             :
             <img src={barrenFieldIcon} alt="the Mages' Shop's logo" width={80}/>}
           </Navbar.Brand>

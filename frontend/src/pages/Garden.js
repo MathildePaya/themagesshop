@@ -24,14 +24,14 @@ function Garden() {
     })
       .then((response) => {
         if (response.status === 401) {
+          setLoggedIn(false);
           navigate('/401')
         }
 
         return response.json()
       })
       .then((data) => {
-        setFields(data.fields);
-        console.log(data)
+        setFields(data.fields)
       })
   }, [refresh]);
 
@@ -100,7 +100,7 @@ function Garden() {
           <tbody className='bg-custombg'>
             {fields ?
               fields.map((field) => {
-                return (<Field id={field.id} size={field.size} state={field.state} plant={field.plant} updateField={updateField} refresh={refresh} setRefresh={setRefresh} />)
+                return (<Field key={field.id} id={field.id} size={field.size} state={field.state} plant={field.plant} updateField={updateField} refresh={refresh} setRefresh={setRefresh} />)
               })
               : null}
           </tbody>

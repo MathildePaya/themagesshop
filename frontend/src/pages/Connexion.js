@@ -29,10 +29,16 @@ function Connexion() {
             })
         })
         .then((response) => {
+            // Check the actual status code received
+            console.log("Response Status:", response.status);
             if (response.status === 401) {
+                console.log("Received 401 response");
                 navigate('/401')
             }
-            return response.json()
+            else {
+                console.log("Ignored if statement");
+                return response.json()
+            }
         })
         .then((data) => {
             localStorage.setItem('access', data.access)
@@ -41,6 +47,7 @@ function Connexion() {
             setLoggedIn(true)
             navigate('/home')
         })
+        .catch()
     }
 
     return (
