@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/logo.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { LoginContext } from '../App';
 import barrenFieldIcon from '../assets/BarrenFieldIcon.png';
@@ -11,6 +11,14 @@ import fieldIcon from '../assets/FieldIcon.png';
 function Header(props) {
 
   const [loggedIn, setLoggedIn] = useContext(LoginContext)
+  const navigate = useNavigate()
+
+  function logOut() {
+    localStorage.clear();
+    setLoggedIn(false);
+    console.log('logging out ...');
+    navigate('/')
+  }
 
   return (
     <div>
@@ -35,7 +43,7 @@ function Header(props) {
             </Navbar.Collapse>
           : null}
           <Navbar.Brand>
-            {loggedIn? <NavLink onClick={() => {localStorage.clear()}} className='mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' >Log Out</NavLink>
+            {loggedIn? <button onClick={logOut} className='mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' >Log Out</button>
             :
             <img src={barrenFieldIcon} alt="the Mages' Shop's logo" width={80}/>}
           </Navbar.Brand>

@@ -47,7 +47,7 @@ function Connexion() {
             setLoggedIn(true)
             navigate('/home')
         })
-        .catch()
+        .catch((error) => {} )
     }
 
     return (

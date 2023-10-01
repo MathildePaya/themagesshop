@@ -11,15 +11,38 @@ import GytrashProfile from './pages/GytrashProfile';
 import Error404 from './pages/Error404';
 import Connexion from './pages/Connexion';
 import Error401 from './pages/Error401';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 
 export const LoginContext = createContext();
 
 function App() {
 
+  useEffect(() => {
+    setInterval(() => {
+      if (localStorage.refresh) {
+        fetch('http://127.0.0.1:8000/api/token/refresh/', {
 
+          method : 'POST',
+          headers : {
+            'Content-Type': 'application/json'
+          },
+          body : JSON.stringify({
+            refresh : localStorage.refresh
+          })
 
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          localStorage.access = data.access;
+          localStorage.refresh = data.refresh
+        })
+      }
+    }, 1000*60*14)
+  }, [])
+  
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
