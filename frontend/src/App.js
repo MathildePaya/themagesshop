@@ -12,6 +12,7 @@ import Error404 from './pages/Error404';
 import Connexion from './pages/Connexion';
 import Error401 from './pages/Error401';
 import { createContext, useEffect, useState } from 'react';
+import Register from './pages/Register';
 
 
 export const LoginContext = createContext();
@@ -59,6 +60,7 @@ function App() {
             <Route path='/gytrash/:id' element={<GytrashProfile />} />
             <Route path='/404' element={<Error404 />} />
             <Route path='/401' element={<Error401 />} />
+            <Route path='/register' element={<Register />} />
             <Route path='/*' element={<Error404 />} />
           </Routes>
         </Header>

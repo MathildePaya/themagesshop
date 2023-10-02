@@ -46,7 +46,7 @@ function SellPlot(props) {
           <p>Size of your plot : {props.size}m².</p>
           <p>You will receive {props.size*200/5} coins.</p>
         </Modal.Body>
-        <Modal.Footer className='bg-custombg'>
+        <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
           <Button variant='success' onClick={sellField}>Sell</Button>
         </Modal.Footer>
       </Modal>

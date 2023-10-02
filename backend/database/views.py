@@ -4,6 +4,7 @@ from database.models import Barn
 from database.serializers import FieldSerializer
 from database.serializers import GytrashSerializer
 from database.serializers import BarnSerializer
+from database.serializers import UserSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -96,3 +97,11 @@ def barn(request):
             serializer.save()
             return Response({'barn' : serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def register(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(status=status.HTTP_201_CREATED)

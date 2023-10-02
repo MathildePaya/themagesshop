@@ -30,7 +30,7 @@ function Harvest(props) {
         <Modal.Body className='bg-custombg'>
           <p>You harvested {props.plant}.</p>
         </Modal.Body>
-        <Modal.Footer className='bg-custombg'>
+        <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
         </Modal.Footer>
       </Modal>
     </>

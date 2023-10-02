@@ -53,7 +53,7 @@ function Connexion() {
     return (
         <div className="bg-custombg p-10 grid grid-cols-3 gap-10">
             <div className="bg-secondcustombg p-4 col-span-2 selection:bg-customlila leading-relaxed">
-            <h1 className="indent-8 font-light">Greetings traveler !</h1>
+                <h1 className="indent-8 font-light">Greetings traveler !</h1>
                 <br/>
                 <p className="text-justify indent-16">Welcome to the enchanting realm of <em className="underline decoration-4 decoration-customlila">the Mages' Shop</em>, a sanctuary that <strong>you</strong> meticulously created to cater to the needs of sorcerers. Within this ethereal enclave, you will <em className="bg-secondcustomlightgreen rounded-md">walk amidst fantastical creatures</em> that you nurture with care and <em className="bg-secondcustomlightgreen rounded-md">beautiful fields</em> where you cultivate the essential ingredients for your own crafts and for mages. Here, they come to replenish their supplies and request the assistance of your gytrashs to protect them in their travels across worlds.</p>
                 <p className="text-justify indent-16">Within the hallowed walls of your sanctuary, you encounter not only familiar faces of old companions but also unexpected acquaintances. You will come to realize that <em className="underline decoration-4 decoration-customlila">your role extends far beyond that of a mere merchant</em>. You become a confidant, a listener, and sometimes even a catalyst for change in the lives of those who cross your path. The burdens they bear, the dreams they chase, and the secrets they carry will intertwine with your own destiny, shaping the tapestry of the enchanting world outside the bounds of your farm.</p>
@@ -89,6 +89,8 @@ function Connexion() {
                     </div>
                 <Button variant='success' onClick={login}>Log In</Button>
                 </form>
+                <br/>
+                <p>Not registered yet ? Create your account <a href='/register' className='text-success no-underline' >here</a> !</p>
             </div>
             
         </div>

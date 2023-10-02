@@ -33,7 +33,7 @@ function NewPlot(props) {
           <p>It will cost you {value*200/5} coins.</p>
 
         </Modal.Body>
-        <Modal.Footer className='bg-custombg'>
+        <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
           <Button variant='success' onClick={handleClick}>Clear</Button>
         </Modal.Footer>
       </Modal>

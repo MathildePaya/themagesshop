@@ -13,7 +13,6 @@ function Cultivate(props) {
   const handleClick = () => {
     const updatedField = {size: props.size, state: 'cultivated', plant: choice};
     props.updateField(props.id, updatedField);
-    setShow(false);
   };
   
   return (
@@ -36,7 +35,7 @@ function Cultivate(props) {
           <p>Seed :</p>
           <SeedCards choice={choice} setChoice={setChoice}/>
         </Modal.Body>
-        <Modal.Footer className='bg-custombg'>
+        <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
           <Button variant="success" onClick={handleClick}>Plant</Button>
         </Modal.Footer>
       </Modal>
