@@ -3,8 +3,18 @@ import BarrenField from '../assets/BarrenFieldIcon.png'
 import Cultivate from './Cultivate'
 import Harvest from './Harvest'
 import SellPlot from './SellPlot'
+import lavenderIcon from '../assets/lavender.png';
+import sageIcon from '../assets/sage.png';
+import gingerIcon from '../assets/ginger.png';
 
 function Field(props) {
+
+    const plantIcons = {
+        'lavender' : lavenderIcon,
+        'sage' : sageIcon,
+        'ginger' : gingerIcon
+    }
+
     return(
         
                 <tr>
@@ -19,7 +29,17 @@ function Field(props) {
                         {props.state}
                     </th>
                     <th className='flow-root p-2' >
-                        <div className='float-left'>{props.plant}</div>
+                        <div className='float-left'>
+                            <div className='flex flex-row items-center space-x-2'>
+                                {props.plant !== 'none' && (
+                                    <>
+                                    <img src={plantIcons[props.plant]} alt={`Icon for ${props.plant}`} width={50} />
+                                    <p>{props.plant}</p>
+                                    </>
+                                )}
+                            </div>
+                            
+                        </div>
                         <div className='float-right'>
                             {props.state === 'fallow' ? 
                                 <Cultivate id={props.id} size={props.size} updateField={props.updateField} />
