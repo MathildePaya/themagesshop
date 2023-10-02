@@ -10,10 +10,15 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showFailure, setShowFailure] = useState(false);
     const navigate = useNavigate();
 
-    function handleClose() {
+    function handleCloseSuccess() {
         navigate('/')
+    }
+
+    function handleCloseFailure() {
+        setShowFailure(false)
     }
 
     function register(e) {
@@ -34,6 +39,9 @@ function Register() {
             console.log("Response Status:", response.status);
             if (response.status === 201) {
                 setShowSuccess(true);
+            }
+            else {
+                setShowFailure(true);
             };
             return response.json()
         })
@@ -73,7 +81,7 @@ function Register() {
 
         <Modal
         show={showSuccess}
-        onHide={handleClose}
+        onHide={handleCloseSuccess}
         backdrop="static"
         keyboard={false}
         >
@@ -82,6 +90,22 @@ function Register() {
             </Modal.Header>
             <Modal.Body className='bg-custombg'>
             <p>Your account has beeen created.</p>
+            </Modal.Body>
+            <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
+            </Modal.Footer>
+        </Modal>
+
+        <Modal
+        show={showFailure}
+        onHide={handleCloseFailure}
+        backdrop="static"
+        keyboard={false}
+        >
+            <Modal.Header closeButton className='bg-custombg' >
+            <Modal.Title>Oops...</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className='bg-custombg'>
+            <p>Something went wrong : this username is already taken or your email address is not valid.</p>
             </Modal.Body>
             <Modal.Footer style={{ backgroundColor: "#e5e0dc" }}>
             </Modal.Footer>

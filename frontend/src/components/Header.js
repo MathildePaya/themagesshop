@@ -25,7 +25,10 @@ function Header(props) {
       <Navbar expand="lg" className="bg-customdarkgreen">
         <Container>
           <Navbar.Brand>
-              <NavLink to="/home"><img src={logo} alt="the Mages' Shop's logo" width={200}/></NavLink>
+            {loggedIn? <NavLink to="/home"><img src={logo} alt="the Mages' Shop's logo" width={200}/></NavLink>
+            : <NavLink to="/"><img src={logo} alt="the Mages' Shop's logo" width={200}/></NavLink>
+            }
+              
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           {loggedIn? 
