@@ -15,10 +15,25 @@ function Barn() {
                 Authorization : 'Bearer ' + localStorage.getItem('access')
             }
         })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response.status);
+            return response.json();
+        })
         .then((data) => {
-        const filteredData = data.barn.filter((item) => item.owner_id === 0);
-        setBarn(filteredData[0]);
+            // Replace 'desiredOwnerName' with the name you want to filter by
+            const desiredOwnerName = 'maddie';
+      
+            // Find the barn with the desired owner
+            const barnWithDesiredOwner = data.barn.find((barn) => barn.owner.username === desiredOwnerName);
+      
+            if (barnWithDesiredOwner) {
+              console.log(barnWithDesiredOwner);
+              setBarn(barnWithDesiredOwner);
+            } else {
+              console.log(`No barn found with owner name: ${desiredOwnerName}`);
+              console.log(data.barn[0].owner)
+              console.log(data)
+            }
         })
     }, []);
 

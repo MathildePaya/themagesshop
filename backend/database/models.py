@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Field(models.Model):
     size = models.IntegerField()
@@ -19,7 +21,7 @@ class Gytrash(models.Model):
     strength = models.IntegerField()
 
 class Barn(models.Model):
-    owner_id = models.IntegerField()
+    owner = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     lavender = models.JSONField()
     sage = models.JSONField()
     ginger = models.JSONField()
