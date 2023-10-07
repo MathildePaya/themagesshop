@@ -6,11 +6,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { LoginContext } from '../App';
 import barrenFieldIcon from '../assets/BarrenFieldIcon.png';
-import fieldIcon from '../assets/FieldIcon.png';
 
 function Header(props) {
 
-  const [loggedIn, setLoggedIn] = useContext(LoginContext)
+  const [loggedIn, setLoggedIn, user, setUser] = useContext(LoginContext)
   const navigate = useNavigate()
 
   function logOut() {
@@ -40,7 +39,7 @@ function Header(props) {
                 )}}>Forest</NavLink>
                 <NavLink to="/workshop" className={({isActive}) => {return((isActive? 'mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' : 'mx-4 px-3 py-2 rounded-md text-lg no-underline text-black')
                 )}}>Workshop</NavLink>
-                <NavLink to="/barn" className={({isActive}) => {return((isActive? 'mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' : 'mx-4 px-3 py-2 rounded-md text-lg no-underline text-black')
+                <NavLink to={"/barn/"+user} className={({isActive}) => {return((isActive? 'mx-4 px-3 py-2 rounded-md text-lg no-underline bg-customlightgreen text-black' : 'mx-4 px-3 py-2 rounded-md text-lg no-underline text-black')
                 )}}>Barn</NavLink>
               </Nav>
             </Navbar.Collapse>

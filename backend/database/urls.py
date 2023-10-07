@@ -12,6 +12,6 @@ urlpatterns = [
     path('api/fields/<int:id>', views.field, name='field'),
     path('api/gytrashs/', views.gytrashs, name='gytrashs'),
     path('api/gytrashs/<int:id>', views.gytrash, name='gytrash'),
-    path('api/barns/', views.barn, name='barns'),
+    path('api/barn/<str:username>', views.barn, name='barn'),
     path('api/register/', views.register, name='register'),
 ]

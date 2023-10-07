@@ -21,7 +21,7 @@ class Gytrash(models.Model):
     strength = models.IntegerField()
 
 class Barn(models.Model):
-    owner = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    farmer = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     lavender = models.JSONField()
     sage = models.JSONField()
     ginger = models.JSONField()

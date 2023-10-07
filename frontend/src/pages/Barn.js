@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import BarnCard from "../components/BarnCard";
+import { useParams } from "react-router-dom";
 
 
 
@@ -7,9 +8,11 @@ function Barn() {
 
     const [barn, setBarn] = useState();
     const items = ['lavender', 'sage', 'ginger'];
+    const {username} = useParams()
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/barns/', {
+        console.log(username);
+        fetch('http://127.0.0.1:8000/api/barn/' + username, {
             headers : {
                 'Content-Type' : 'application/json',
                 Authorization : 'Bearer ' + localStorage.getItem('access')
@@ -20,21 +23,10 @@ function Barn() {
             return response.json();
         })
         .then((data) => {
-            // Replace 'desiredOwnerName' with the name you want to filter by
-            const desiredOwnerName = 'maddie';
-      
-            // Find the barn with the desired owner
-            const barnWithDesiredOwner = data.barn.find((barn) => barn.owner.username === desiredOwnerName);
-      
-            if (barnWithDesiredOwner) {
-              console.log(barnWithDesiredOwner);
-              setBarn(barnWithDesiredOwner);
-            } else {
-              console.log(`No barn found with owner name: ${desiredOwnerName}`);
-              console.log(data.barn[0].owner)
-              console.log(data)
+            console.log(data);
+            setBarn(data.barn)
             }
-        })
+        )
     }, []);
 
 

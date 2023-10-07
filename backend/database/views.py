@@ -1,6 +1,7 @@
 from database.models import Field
 from database.models import Gytrash
 from database.models import Barn
+from django.contrib.auth.models import User
 from database.serializers import FieldSerializer
 from database.serializers import GytrashSerializer
 from database.serializers import BarnSerializer
@@ -86,11 +87,21 @@ def gytrash(request, id):
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def barn(request):
+def barn(request, username):
     if request.method == 'GET':
-        data = Barn.objects.all()
-        serializer = BarnSerializer(data, many=True)
-        return Response({'barn': serializer.data})
+        try :
+            #get the user's id
+            user = User.objects.get(username=username)
+            user_id = user.id
+            print(user)
+            print(user_id)
+            
+            #get the barn
+            data = Barn.objects.get(farmer=user_id)
+            serializer = BarnSerializer(data)
+            return Response({'barn': serializer.data})
+        except User.DoesNotExist: 
+            return Response(status=status.HTTP_404_NOT_FOUND)
     elif request.method == 'POST':
         serializer = BarnSerializer(data=request.data)
         if serializer.is_valid():

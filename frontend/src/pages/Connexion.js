@@ -10,7 +10,7 @@ import { LoginContext } from '../App';
 
 function Connexion() {
 
-    const [loggedIn, setLoggedIn] = useContext(LoginContext);
+    const [loggedIn, setLoggedIn, user, setUser] = useContext(LoginContext);
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -45,6 +45,7 @@ function Connexion() {
             localStorage.setItem('refresh', data.refresh)
             console.log(localStorage)
             setLoggedIn(true)
+            setUser(username)
             navigate('/home')
         })
         .catch((error) => {} )

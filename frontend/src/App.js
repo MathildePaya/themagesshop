@@ -45,9 +45,10 @@ function App() {
   }, [])
   
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState('')
 
   return (
-    <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
+    <LoginContext.Provider value={[loggedIn, setLoggedIn, user, setUser]}>
       <BrowserRouter>
         <Header>
           <Routes>
@@ -56,7 +57,7 @@ function App() {
             <Route path='/home' element={<HomePage />} />
             <Route path='/' element={<Connexion />} />
             <Route path='/workshop' element={<Workshop />} />
-            <Route path='/barn' element={<Barn />} />
+            <Route path='/barn/:username' element={<Barn />} />
             <Route path='/gytrash/:id' element={<GytrashProfile />} />
             <Route path='/404' element={<Error404 />} />
             <Route path='/401' element={<Error401 />} />
