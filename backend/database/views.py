@@ -14,11 +14,29 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def fields(request):
+def fields(request, username):
+    
     if request.method == 'GET':
-        data = Field.objects.all()
-        serializer = FieldSerializer(data, many=True)
-        return Response({'fields': serializer.data})
+        try:
+            # Get the user's id
+            user = User.objects.get(username=username)
+            user_id = user.id
+
+            # Get all fields associated with the farmer's user_id
+            fields = Field.objects.filter(farmer=user_id)
+            
+            # Serialize the fields
+            serializer = FieldSerializer(fields, many=True)
+            
+            # Check if any fields were found
+            if fields.exists():
+                return Response({'fields': serializer.data})
+            else:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            
+        except User.DoesNotExist: 
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    
     elif request.method == 'POST':
         serializer = FieldSerializer(data=request.data)
         if serializer.is_valid():

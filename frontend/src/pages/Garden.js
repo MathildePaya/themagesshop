@@ -10,7 +10,7 @@ import { LoginContext } from '../App';
 function Garden() {
 
   // useContext hook to access the login status from a context
-  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+  const [loggedIn, setLoggedIn, user, setUser] = useContext(LoginContext);
 
   // useState hooks to manage component state
   const [fields, setFields] = useState([]);
@@ -23,7 +23,8 @@ function Garden() {
   // useEffect hook to perform an action when the component mounts or 'refresh' changes
   useEffect(() => {
     // Fetch data from a remote API endpoint
-    fetch('http://127.0.0.1:8000/api/fields/', {
+    console.log(user)
+    fetch('http://127.0.0.1:8000/api/fields/' + user, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('access')
@@ -35,9 +36,11 @@ function Garden() {
           setLoggedIn(false);
           navigate('/401');
         }
+        console.log(response.status)
         return response.json();
       })
       .then((data) => {
+        console.log(data)
         // Update the 'fields' state with the fetched data
         setFields(data.fields);
       });

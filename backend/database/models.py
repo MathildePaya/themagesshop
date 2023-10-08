@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Field(models.Model):
+    farmer = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     size = models.IntegerField()
     state = models.CharField(max_length=40)
     plant = models.CharField(max_length=40)
