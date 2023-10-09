@@ -10,7 +10,7 @@ import { LoginContext } from '../App';
 
 function Connexion() {
 
-    const [loggedIn, setLoggedIn, user, setUser] = useContext(LoginContext);
+    const [loggedIn, setLoggedIn, user, setUser, userId, setUserId] = useContext(LoginContext);
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -41,14 +41,37 @@ function Connexion() {
             }
         })
         .then((data) => {
-            localStorage.setItem('access', data.access)
-            localStorage.setItem('refresh', data.refresh)
-            console.log(localStorage)
-            setLoggedIn(true)
-            setUser(username)
-            navigate('/home')
+            localStorage.setItem('access', data.access);
+            localStorage.setItem('refresh', data.refresh);
+            console.log(data);
+            setLoggedIn(true);
+            setUser(username);
+
+            // Make a separate API request to fetch user information
+            fetch('http://127.0.0.1:8000/api/user/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${data.access}`,
+                },
+            })
+            .then((userResponse) => {
+                console.log('response status : '+ userResponse.status);
+                        
+                return userResponse.json();
+            })
+            .then((userData) => {
+                console.log('still running');
+                // Assuming your user data response includes a 'user_id' field
+                const userId = userData.user_id; // Modify this according to your API response structure
+                setUserId(userId);
+                console.log(userId);
+
+                navigate('/home');
+            })
+
+
         })
-        .catch((error) => {} )
+        .catch((error) => {});
     }
 
     return (

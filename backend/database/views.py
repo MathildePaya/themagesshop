@@ -12,6 +12,24 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_info(request):
+    """
+    Retrieve user information for the authenticated user.
+    """
+    user = request.user  # This gives you the authenticated user
+
+    # You can customize the data you want to return here, for example, username and user ID
+    user_info = {
+        'user_id': user.id,
+        'username': user.username,
+        # Add other user information fields as needed
+    }
+
+    return Response(user_info, status=status.HTTP_200_OK)
+    
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def fields(request, username):

@@ -45,10 +45,11 @@ function App() {
   }, [])
   
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState('');
+  const [userId, setUserId] = useState(0);
 
   return (
-    <LoginContext.Provider value={[loggedIn, setLoggedIn, user, setUser]}>
+    <LoginContext.Provider value={[loggedIn, setLoggedIn, user, setUser, userId, setUserId]}>
       <BrowserRouter>
         <Header>
           <Routes>

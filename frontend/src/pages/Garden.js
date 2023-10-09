@@ -10,7 +10,7 @@ import { LoginContext } from '../App';
 function Garden() {
 
   // useContext hook to access the login status from a context
-  const [loggedIn, setLoggedIn, user, setUser] = useContext(LoginContext);
+  const [loggedIn, setLoggedIn, user, setUser, userId, setUserId] = useContext(LoginContext);
 
   // useState hooks to manage component state
   const [fields, setFields] = useState([]);
@@ -70,8 +70,8 @@ function Garden() {
 
   // Function to create a new field via a POST request
   function newField(value) {
-    const url = 'http://127.0.0.1:8000/api/fields/';
-    const data = { size: value, state: 'fallow', plant: 'none' };
+    const url = 'http://127.0.0.1:8000/api/fields/' + user;
+    const data = { farmer : userId, size: value, state: 'fallow', plant: 'none' };
     fetch(url, {
       method: 'POST',
       headers: {

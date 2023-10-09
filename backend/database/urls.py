@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/gytrashs/<int:id>', views.gytrash, name='gytrash'),
     path('api/barn/<str:username>', views.barn, name='barn'),
     path('api/register/', views.register, name='register'),
+    path('api/user/', views.get_user_info, name='user'),
 ]

@@ -3,6 +3,8 @@ from database.models import Field
 from database.models import Gytrash
 from database.models import Barn
 from django.contrib.auth.models import User 
+from rest_framework import serializers
+
 
 class FieldSerializer(serializers.ModelSerializer):
     class Meta:
