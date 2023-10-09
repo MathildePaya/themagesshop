@@ -48,7 +48,7 @@ function Garden() {
 
   // Function to update a field's information via a POST request
   function updateField(id, updatedField) {
-    const url = 'http://127.0.0.1:8000/api/fields/' + id;
+    const url = 'http://127.0.0.1:8000/api/field/' + id;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -71,20 +71,19 @@ function Garden() {
   // Function to create a new field via a POST request
   function newField(value) {
     const url = 'http://127.0.0.1:8000/api/fields/' + user;
-    const data = { farmer : userId, size: value, state: 'fallow', plant: 'none' };
+    const newfield = { farmer : userId, size: value, state: 'fallow', plant: 'none' };
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('access')
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(newfield)
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Something went wrong');
         }
-        console.log('field created');
         return response.json();
       })
       .then((data) => {

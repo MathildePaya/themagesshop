@@ -12,7 +12,7 @@ function SellPlot(props) {
 
   
   function sellField() {
-    const url = 'http://127.0.0.1:8000/api/fields/' + props.id
+    const url = 'http://127.0.0.1:8000/api/field/' + props.id
     fetch(url, {
       method : 'DELETE',
       headers : {
@@ -22,6 +22,7 @@ function SellPlot(props) {
     })
     .then((response) => {
       if (!response.ok){
+        console.log(response.status)
         throw new Error('Something went wrong :(')
       }
     }).catch((e) => {console.log(e)});

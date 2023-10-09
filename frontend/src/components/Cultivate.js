@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import SeedCards from './SeedCards';
+import { LoginContext } from '../App';
 
 function Cultivate(props) {
   const [show, setShow] = useState(false);
+
+  const [loggedIn, setLoggedIn, user, setUser, userId, setUserId] = useContext(LoginContext);
 
   const [choice, setChoice] = useState('nochoice');
 
   const handleClose = () => {setShow(false); setChoice('nochoice')};
   const handleShow = () => setShow(true);
   const handleClick = () => {
-    const updatedField = {size: props.size, state: 'cultivated', plant: choice};
+    const updatedField = {farmer: userId, size: props.size, state: 'cultivated', plant: choice};
     props.updateField(props.id, updatedField);
   };
   

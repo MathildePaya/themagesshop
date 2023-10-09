@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { LoginContext } from '../App';
 
 function Harvest(props) {
   const [show, setShow] = useState(false);
 
+  
+  const [loggedIn, setLoggedIn, user, setUser, userId, setUserId] = useContext(LoginContext);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleClick = () => {
-    const updatedField = {size: props.size, state: 'fallow', plant: 'none'};
+    const updatedField = {farmer: userId, size: props.size, state: 'fallow', plant: 'none'};
     props.updateField(props.id, updatedField);
   };
   

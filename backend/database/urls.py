@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('api/fields/<str:username>', views.fields, name='fields'),
-    path('api/fields/<int:id>', views.field, name='field'),
+    path('api/field/<int:id>', views.field, name='field'),
     path('api/gytrashs/', views.gytrashs, name='gytrashs'),
     path('api/gytrashs/<int:id>', views.gytrash, name='gytrash'),
     path('api/barn/<str:username>', views.barn, name='barn'),
