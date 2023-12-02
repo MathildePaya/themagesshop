@@ -50,7 +50,7 @@ def fields(request, username):
             if fields.exists():
                 return Response({'fields': serializer.data})
             else:
-                return Response(status=status.HTTP_404_NOT_FOUND)
+                return Response({'fields': None})
             
         except User.DoesNotExist: 
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -123,7 +123,6 @@ def gytrash(request, id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def barn(request, username):
     if request.method == 'GET':
         try :
@@ -152,4 +151,4 @@ def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(status=status.HTTP_201_CREATED)
+        return Response({'user' : serializer.data}, status=status.HTTP_201_CREATED)

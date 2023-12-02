@@ -23,33 +23,57 @@ function Register() {
 
     function register(e) {
         e.preventDefault();
+    
+        // Step 1: Register the user
         fetch('http://127.0.0.1:8000/api/register/', {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            body : JSON.stringify({
-                username : username,
-                email : email,
-                password : password 
-            })
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password,
+            }),
         })
         .then((response) => {
-            // Check the actual status code received
             console.log("Response Status:", response.status);
             if (response.status === 201) {
                 setShowSuccess(true);
-            }
-            else {
+    
+                // Step 2: Create a new Barn for the registered user
+                return response.json();
+            } else {
                 setShowFailure(true);
-            };
-            return response.json()
+                throw new Error("Registration failed");
+            }
         })
         .then((data) => {
-            console.log(data);
+            console.log("User Data:", data.user);
             
+            const newbarn = {'farmer' : data.user.id, 'lavender' : {"type": "plant", "discovered": 0, "stock": 0}, 'sage' : {"type": "plant", "discovered": 0, "stock": 0}, 'ginger' : {"type": "plant", "discovered": 0, "stock": 0}};
+            // Create a new Barn for the registered user
+            fetch('http://127.0.0.1:8000/api/barn/' + data.user.username, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newbarn),
+            })
+            .then((barnResponse) => {
+                if (barnResponse.status === 201) {
+                    console.log("Barn created successfully");
+                } else {
+                    console.error("Failed to create Barn");
+                }
+            })
+            .catch((barnError) => {
+                console.error("Error creating Barn:", barnError);
+            });
         })
-        .catch((error) => {} )
+        .catch((error) => {
+            console.error("Registration error:", error);
+        });
     }
 
     return (

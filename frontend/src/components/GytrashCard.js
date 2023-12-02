@@ -1,6 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import gytrashIcon from '../assets/gytrashIcon.png';
+import { NavLink } from 'react-router-dom';
+
 
 function GytrashCard({id, name, icon}){
 
@@ -8,7 +10,7 @@ function GytrashCard({id, name, icon}){
         <Card text='white' style={{ width: '18rem' }} bg='dark'>
             <Card.Img variant="top" src={gytrashIcon} className='p-4' />
             <Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button variant="success" href={'/gytrash/'+ id}>{name}</Button>
+                <NavLink to={'/gytrash/'+ id} >{name}</NavLink>
             </Card.Body>
         </Card>
     );

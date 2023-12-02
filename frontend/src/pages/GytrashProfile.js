@@ -11,7 +11,13 @@ function GytrashProfile() {
 
     useEffect(() => {
         const url = 'http://127.0.0.1:8000/api/gytrashs/' + id ;
-        fetch(url)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + localStorage.getItem('access')
+            }
+          })
         .then((response) => {
             if (response.status === 404){
                 //redirect to a 404 page
